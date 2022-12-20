@@ -1,0 +1,10 @@
+syntax = "proto2";
+
+import "nanopb.proto";
+
+message SpeechSample {
+    required uint32 timestamp = 1;
+    required uint32 pkts_encoded = 2 [(nanopb).int_size = IS_16];
+    // audio samples array, max_count is FRAME_SIZE, see hostcom_task.c
+    repeated uint32 samples = 3 [ (nanopb).int_size = IS_16, (nanopb).max_count = 128, (nanopb).fixed_count = true];
+}
